@@ -6,6 +6,10 @@
   <meta name="description" content="GLOBAL PROPERTY INVESTMENT connects property opportunities in Indonesia with international partners and investors.">
   <meta name="theme-color" content="#071521">
   <title>GLOBAL PROPERTY INVESTMENT | Indonesia Property Opportunities</title>
+  
+  <!-- Supabase JS Library -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <style>
     :root{
       --navy:#071521;--navy2:#0d2433;--panel:#102b3b;--gold:#d8b46a;--gold2:#f0d79e;
@@ -33,6 +37,7 @@
     .menu-btn{display:none}
     .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 19px;border-radius:12px;border:1px solid transparent;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#17212a;font-weight:800;font-size:.88rem;cursor:pointer;transition:.2s}
     .btn:hover{transform:translateY(-2px);filter:brightness(1.06)}
+    .btn:disabled{opacity:0.6;cursor:not-allowed;transform:none}
     .btn-outline{background:transparent;color:var(--white);border-color:rgba(216,180,106,.65)}
     .hero{position:relative;overflow:hidden;padding:105px 0 95px;background:linear-gradient(90deg,rgba(5,17,27,.96),rgba(5,17,27,.75) 55%,rgba(5,17,27,.35)),url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=85') center/cover}
     .hero:after{content:"";position:absolute;width:520px;height:520px;border:1px solid rgba(216,180,106,.18);border-radius:50%;right:-180px;top:-170px;box-shadow:0 0 0 45px rgba(216,180,106,.035),0 0 0 95px rgba(216,180,106,.025)}
@@ -107,7 +112,7 @@
     select option{background:#091b28}
     textarea{min-height:125px;resize:vertical}
     .form-foot{grid-column:1/-1;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-    .form-message{font-size:.8rem;color:var(--muted)}
+    .form-message{font-size:.8rem;font-weight:600}
     .disclaimer{font-size:.78rem;color:var(--muted);margin-top:15px}
     footer{border-top:1px solid var(--line);padding:28px 0;background:#06111a;color:var(--muted);font-size:.8rem}
     .footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
@@ -262,6 +267,7 @@
         <p class="sample-note" data-en="Select this panel to open the full IndoProperti website and view its current listings." data-id="Klik panel ini untuk membuka website IndoProperti dan melihat listing terbarunya.">Select this panel to open the full IndoProperti website and view its current listings.</p>
       </div>
     </section>
+    
     <section class="dark-section" id="process">
       <div class="container">
         <div class="section-head">
@@ -312,6 +318,7 @@
               <div><b>Office / Location</b>Indonesia</div>
             </div>
           </div>
+          
           <div class="contact-panel">
             <form id="inquiryForm">
               <div class="field"><label for="name" data-en="Full name" data-id="Nama lengkap">Full name</label><input id="name" name="name" required autocomplete="name" placeholder="Your name"></div>
@@ -321,9 +328,12 @@
               <div class="field"><label for="interest" data-en="Area of interest" data-id="Minat properti">Area of interest</label><select id="interest" name="interest" required><option value="" data-en="Select an option" data-id="Pilih salah satu">Select an option</option><option>Commercial land</option><option>Industrial property</option><option>Warehouse / factory</option><option>Property partnership</option><option>Other inquiry</option></select></div>
               <div class="field"><label for="role" data-en="I am a..." data-id="Saya adalah...">I am a...</label><select id="role" name="role"><option>Investor / Investment representative</option><option>Property owner</option><option>Company / Developer</option><option>Property agent / Consultant</option><option>Other</option></select></div>
               <div class="field full"><label for="message" data-en="Message" data-id="Pesan">Message</label><textarea id="message" name="message" required placeholder="Tell us briefly about your inquiry..."></textarea></div>
-              <div class="form-foot"><button class="btn" type="submit" data-en="Prepare email inquiry →" data-id="Siapkan email pertanyaan →">Prepare email inquiry →</button><span class="form-message" id="formMessage" aria-live="polite"></span></div>
+              <div class="form-foot">
+                <button class="btn" type="submit" data-en="Send inquiry →" data-id="Kirim pertanyaan →">Send inquiry →</button>
+                <span class="form-message" id="formMessage" aria-live="polite"></span>
+              </div>
             </form>
-            <p class="disclaimer" data-en="This demo form opens your email application. It does not store or transmit form data to a server." data-id="Formulir demo ini membuka aplikasi email Anda. Data formulir tidak disimpan atau dikirim ke server.">This demo form opens your email application. It does not store or transmit form data to a server.</p>
+            <p class="disclaimer" data-en="Your inquiry will be sent securely to our database. We will respond shortly." data-id="Pertanyaan Anda akan dikirim dengan aman ke database kami. Kami akan segera merespons.">Your inquiry will be sent securely to our database. We will respond shortly.</p>
           </div>
         </div>
       </div>
@@ -340,9 +350,18 @@
   <div class="mobile-cta"><a class="btn" href="#contact" data-en="Contact our team" data-id="Hubungi tim kami">Contact our team</a></div>
 
   <script>
-    // Official business contact details
-    const BUSINESS_EMAIL = "elghifarin@gmail.com";
+    // ==========================================
+    // KONFIGURASI SUPABASE - KREDENSIAL ANDA
+    // ==========================================
+    const SUPABASE_URL = 'https://ppyqsdtprdcylsdgaw.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_DvC7NMmqaWLVmpYvd_PPuQ_RssCluyW';
+    
+    // Inisialisasi klien Supabase
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+    // ==========================================
+    // NAVIGATION & LANGUAGE TOGGLE
+    // ==========================================
     const menuToggle = document.getElementById("menuToggle");
     const navLinks = document.getElementById("navLinks");
     menuToggle.addEventListener("click", () => navLinks.classList.toggle("open"));
@@ -359,21 +378,78 @@
 
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    document.getElementById("inquiryForm").addEventListener("submit", function(event) {
+    // ==========================================
+    // PENGIRIMAN FORM KE SUPABASE
+    // ==========================================
+    document.getElementById("inquiryForm").addEventListener("submit", async function(event) {
       event.preventDefault();
-      const form = new FormData(this);
-      const subject = encodeURIComponent("Property Inquiry - GLOBAL PROPERTY INVESTMENT");
-      const body = encodeURIComponent(
-        "Name: " + form.get("name") + "\n" +
-        "Company: " + form.get("company") + "\n" +
-        "Country: " + form.get("country") + "\n" +
-        "Email: " + form.get("email") + "\n" +
-        "Interest: " + form.get("interest") + "\n" +
-        "Role: " + form.get("role") + "\n\n" +
-        "Message:\n" + form.get("message")
-      );
-      window.location.href = `mailto:${BUSINESS_EMAIL}?subject=${subject}&body=${body}`;
+      
+      const form = this;
+      const formData = new FormData(form);
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const formMessage = document.getElementById("formMessage");
+      
+      // Simpan teks asli tombol
+      const originalBtnText = submitBtn.textContent;
+      submitBtn.textContent = currentLang === "en" ? "Sending..." : "Mengirim...";
+      submitBtn.disabled = true;
+      formMessage.textContent = "";
+      formMessage.style.color = "var(--muted)";
+
+      try {
+        // Kirim data ke tabel 'inquiries' di Supabase
+        const { data, error } = await supabaseClient
+          .from('inquiries')
+          .insert([{
+            name: formData.get("name"),
+            company: formData.get("company") || null,
+            country: formData.get("country"),
+            email: formData.get("email"),
+            interest: formData.get("interest"),
+            role: formData.get("role") || null,
+            message: formData.get("message")
+          }])
+          .select();
+
+        if (error) throw error;
+
+        // Jika berhasil
+        formMessage.textContent = currentLang === "en" 
+          ? "✅ Inquiry sent successfully! We will contact you soon." 
+          : "✅ Pertanyaan berhasil dikirim! Kami akan segera menghubungi Anda.";
+        formMessage.style.color = "#4ade80";
+        form.reset();
+
+        // Scroll ke pesan sukses
+        formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      } catch (error) {
+        console.error("Error sending inquiry:", error);
+        formMessage.textContent = currentLang === "en"
+          ? "❌ Failed to send: " + (error.message || "Please try again or contact us via WhatsApp.")
+          : "❌ Gagal mengirim: " + (error.message || "Silakan coba lagi atau hubungi kami via WhatsApp.");
+        formMessage.style.color = "#f87171";
+      } finally {
+        submitBtn.textContent = originalBtnText;
+        submitBtn.disabled = false;
+      }
     });
+
+    // ==========================================
+    // TEST KONEKSI SUPABASE (bisa dihapus setelah yakin terhubung)
+    // ==========================================
+    (async function testConnection() {
+      try {
+        const { data, error } = await supabaseClient.from('inquiries').select('id').limit(1);
+        if (error && error.code !== 'PGRST116') {
+          console.warn('⚠️ Supabase connection issue:', error.message);
+        } else {
+          console.log('✅ Supabase terhubung dengan sukses!');
+        }
+      } catch (err) {
+        console.error('❌ Error koneksi Supabase:', err);
+      }
+    })();
   </script>
 </body>
 </html>

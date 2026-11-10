@@ -1,15 +1,12 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="GLOBAL PROPERTY INVESTMENT connects property opportunities in Indonesia with international partners and investors." name="description"/>
-<meta content="#071521" name="theme-color"/>
-<title>GLOBAL PROPERTY INVESTMENT | Indonesia Property Opportunities</title>
-<!-- Supabase JS Library -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GLOBAL PROPERTY INVESTMENT connects property opportunities in Indonesia with international partners and investors.">
+  <meta name="theme-color" content="#071521">
+  <title>GLOBAL PROPERTY INVESTMENT | Indonesia Property Opportunities</title>
+  <style>
     :root{
       --navy:#071521;--navy2:#0d2433;--panel:#102b3b;--gold:#d8b46a;--gold2:#f0d79e;
       --white:#f7f8f6;--muted:#b8c5cb;--line:rgba(255,255,255,.13);
@@ -27,8 +24,7 @@
     header{position:sticky;top:0;z-index:50;background:rgba(7,21,33,.91);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
     .nav{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:24px}
     .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.08em;font-size:.9rem}
-    .brand-mark{width:150px;height:70px;flex:0 0 150px;border:0;border-radius:0;display:block;background:transparent;overflow:hidden}
-    .brand-mark img{width:100%;height:100%;object-fit:contain}
+    .brand-mark{width:40px;height:40px;border:1px solid var(--gold);border-radius:12px;display:grid;place-items:center;color:var(--gold);font-size:1.15rem}
     .brand small{display:block;color:var(--gold);font-size:.58rem;letter-spacing:.2em;font-weight:600}
     .nav-links{display:flex;align-items:center;gap:25px;color:#d8e0e3;font-size:.88rem}
     .nav-links a:hover{color:var(--gold2)}
@@ -37,7 +33,6 @@
     .menu-btn{display:none}
     .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 19px;border-radius:12px;border:1px solid transparent;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#17212a;font-weight:800;font-size:.88rem;cursor:pointer;transition:.2s}
     .btn:hover{transform:translateY(-2px);filter:brightness(1.06)}
-    .btn:disabled{opacity:0.6;cursor:not-allowed;transform:none}
     .btn-outline{background:transparent;color:var(--white);border-color:rgba(216,180,106,.65)}
     .hero{position:relative;overflow:hidden;padding:105px 0 95px;background:linear-gradient(90deg,rgba(5,17,27,.96),rgba(5,17,27,.75) 55%,rgba(5,17,27,.35)),url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=85') center/cover}
     .hero:after{content:"";position:absolute;width:520px;height:520px;border:1px solid rgba(216,180,106,.18);border-radius:50%;right:-180px;top:-170px;box-shadow:0 0 0 45px rgba(216,180,106,.035),0 0 0 95px rgba(216,180,106,.025)}
@@ -80,8 +75,7 @@
     .catalog-card{display:grid;grid-template-columns:1fr 1.35fr auto;align-items:center;gap:30px;padding:27px 30px;border:1px solid rgba(216,180,106,.35);border-radius:20px;background:linear-gradient(115deg,#102b3b,#0a1c29);box-shadow:var(--shadow);transition:.25s}
     .catalog-card:hover{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 28px 75px rgba(0,0,0,.36)}
     .catalog-brand{display:flex;align-items:center;gap:16px;min-width:0}
-    .catalog-logo{width:100px;height:88px;flex:0 0 100px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:transparent;border:0;border-radius:0}
-    .catalog-logo img{display:block;width:100%;height:100%;object-fit:contain}
+    .catalog-logo{width:66px;height:66px;flex:0 0 66px;border-radius:17px;border:1px solid rgba(216,180,106,.7);display:grid;place-items:center;background:linear-gradient(145deg,rgba(216,180,106,.2),rgba(216,180,106,.04));color:var(--gold2);font-weight:900;font-size:1.35rem;letter-spacing:-.08em}
     .catalog-brand-text h3{font-size:1.2rem;letter-spacing:.08em;margin:3px 0 0;color:var(--white)}
     .catalog-brand-text p{margin:1px 0 0;font-size:.7rem;letter-spacing:.16em;color:var(--gold2)}
     .catalog-kicker{font-size:.62rem;letter-spacing:.18em;color:var(--muted);font-weight:800}
@@ -113,7 +107,7 @@
     select option{background:#091b28}
     textarea{min-height:125px;resize:vertical}
     .form-foot{grid-column:1/-1;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-    .form-message{font-size:.8rem;font-weight:600}
+    .form-message{font-size:.8rem;color:var(--muted)}
     .disclaimer{font-size:.78rem;color:var(--muted);margin-top:15px}
     footer{border-top:1px solid var(--line);padding:28px 0;background:#06111a;color:var(--muted);font-size:.8rem}
     .footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
@@ -127,7 +121,7 @@
     @media(max-width:700px){
       .container{width:min(100% - 30px,1160px)}
       .topbar .container{justify-content:center;text-align:center}.topbar .container span:last-child{display:none}
-      .nav{min-height:68px}.brand-mark{width:120px;height:58px;flex-basis:120px}.menu-btn{display:inline-flex}.nav-links{display:none;position:absolute;top:68px;left:0;right:0;background:#081925;padding:18px 22px 22px;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch}
+      .nav{min-height:68px}.menu-btn{display:inline-flex}.nav-links{display:none;position:absolute;top:68px;left:0;right:0;background:#081925;padding:18px 22px 22px;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch}
       .nav-links.open{display:flex}.nav-links a{padding:8px 0}.nav-actions .btn{display:none}
       .hero{padding:75px 0 65px;background-position:60% center}.hero-note{gap:17px}
       section{padding:62px 0}.section-head{display:block}.section-head p{margin-top:14px}
@@ -153,163 +147,220 @@
   </style>
 </head>
 <body>
-<div class="topbar">
-<div class="container"><span>INDONESIA PROPERTY OPPORTUNITIES · INTERNATIONAL PARTNERSHIPS</span><span>Professional property information platform</span></div>
-</div>
-<header>
-<div class="container nav">
-<a aria-label="Global Property Investment home" class="brand" href="#home">
-<span class="brand-mark"><img alt="GLOBAL PROPERTY INVESTMENT Indonesia" src="logo.png" /></div>
-<div class="catalog-brand-text">
-<span class="catalog-kicker">PROPERTY DIRECTORY</span>
-<h3>INDOPROPERTI</h3>
-<p>COMMERCIAL · INDUSTRIAL</p>
-</div>
-</div>
-<div class="catalog-summary">
-<div class="catalog-stat"><strong>01</strong><span data-en="Land listings" data-id="Land listings">Land listings</span></div>
-<div class="catalog-stat"><strong>02</strong><span data-en="Commercial properties" data-id="Commercial properties">Commercial properties</span></div>
-<div class="catalog-stat"><strong>03</strong><span data-en="Industrial properties" data-id="Industrial properties">Industrial properties</span></div>
-</div>
-<div class="catalog-action">
-<span data-en="View all listings on IndoProperti" data-id="View all listings on IndoProperti">View all listings on IndoProperti</span>
-<span aria-hidden="true" class="catalog-arrow">↗</span>
-</div>
-</a>
-<p class="sample-note" data-en="Select this panel to open the full IndoProperti website and view its current listings." data-id="Select this panel to open the full IndoProperti website and view its current listings.">Select this panel to open the full IndoProperti website and view its current listings.</p>
-</div>
-</section>
-<section class="dark-section" id="process">
-<div class="container">
-<div class="section-head">
-<div><span class="eyebrow" data-en="A clear starting point" data-id="A clear starting point">A clear starting point</span><h2 data-en="How the introduction process works" data-id="How the introduction process works">How the introduction process works</h2></div>
-<p data-en="An initial inquiry is a starting point for discussion, not an offer, guarantee, or investment recommendation." data-id="An initial inquiry is a starting point for discussion, not an offer, guarantee, or investment recommendation.">An initial inquiry is a starting point for discussion, not an offer, guarantee, or investment recommendation.</p>
-</div>
-<div class="process-grid">
-<div class="process-card"><span class="process-number">STEP 01</span><h3 data-en="Send an inquiry" data-id="Send an inquiry">Send an inquiry</h3><p data-en="Tell us what property type or cooperation opportunity you want to explore." data-id="Tell us what property type or cooperation opportunity you want to explore.">Tell us what property type or cooperation opportunity you want to explore.</p></div>
-<div class="process-card"><span class="process-number">STEP 02</span><h3 data-en="Initial discussion" data-id="Initial discussion">Initial discussion</h3><p data-en="Discuss general requirements, location preferences, and information needed." data-id="Discuss general requirements, location preferences, and information needed.">Discuss general requirements, location preferences, and information needed.</p></div>
-<div class="process-card"><span class="process-number">STEP 03</span><h3 data-en="Review information" data-id="Review information">Review information</h3><p data-en="Relevant property documents and details should be independently checked." data-id="Relevant property documents and details should be independently checked.">Relevant property documents and details should be independently checked.</p></div>
-<div class="process-card"><span class="process-number">STEP 04</span><h3 data-en="Professional follow-up" data-id="Professional follow-up">Professional follow-up</h3><p data-en="Parties may proceed to professional, legal, and regulatory consultation as appropriate." data-id="Parties may proceed to professional, legal, and regulatory consultation as appropriate.">Parties may proceed to professional, legal, and regulatory consultation as appropriate.</p></div>
-</div>
-</div>
-</section>
-<section id="contact">
-<div class="container">
-<div class="section-head">
-<div><span class="eyebrow" data-en="Start a conversation" data-id="Start a conversation">Start a conversation</span><h2 data-en="Connect with our team" data-id="Connect with our team">Connect with our team</h2></div>
-<p data-en="Property owners, companies, and international parties can use this form to introduce their inquiry." data-id="Property owners, companies, and international parties can use this form to introduce their inquiry.">Property owners, companies, and international parties can use this form to introduce their inquiry.</p>
-</div>
-<div class="contact-grid">
-<div class="contact-panel">
-<span class="eyebrow" data-en="Contact information" data-id="Contact information">Contact information</span>
-<h3>GLOBAL PROPERTY INVESTMENT</h3>
-<p class="muted">Indonesia property information and introductions.</p>
-<a class="contact-item" href="mailto:elghifarin@gmail.com" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;">
-<svg fill="none" height="20" stroke="var(--gold2)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="flex-shrink:0;" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg">
-<rect height="16" rx="2" width="20" x="2" y="4"></rect>
-<path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-</svg>
-<div><b>Email</b>Click to send an email</div>
-</a>
-<a class="contact-item" href="https://wa.me/6282126526162" rel="noopener noreferrer" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;" target="_blank">
-<svg fill="#25D366" height="20" style="flex-shrink:0;" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg">
-<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path>
-</svg>
-<div><b>WhatsApp</b>Click to start a WhatsApp chat</div>
-</a>
-<div class="contact-item" style="border-bottom:none;display:flex;align-items:center;gap:12px;">
-<svg fill="none" height="20" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="flex-shrink:0;" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg">
-<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-<circle cx="12" cy="10" r="3"></circle>
-</svg>
-<div><b>Office / Location</b>Indonesia</div>
-</div>
-</div>
-<div class="contact-panel">
-<form id="inquiryForm">
-<div class="field"><label data-en="Full name" data-id="Full name" for="name">Full name</label><input autocomplete="name" id="name" name="name" placeholder="Your name" required=""/></div>
-<div class="field"><label data-en="Company" data-id="Company" for="company">Company</label><input id="company" name="company" placeholder="Company name"/></div>
-<div class="field"><label data-en="Country" data-id="Country" for="country">Country</label><input autocomplete="country-name" id="country" name="country" placeholder="Your country" required=""/></div>
-<div class="field"><label data-en="Email address" data-id="Email address" for="email">Email address</label><input autocomplete="email" id="email" name="email" placeholder="name@company.com" required="" type="email"/></div>
-<div class="field"><label data-en="Area of interest" data-id="Area of interest" for="interest">Area of interest</label><select id="interest" name="interest" required=""><option data-en="Select an option" data-id="Select an option" value="">Select an option</option><option>Commercial land</option><option>Industrial property</option><option>Warehouse / factory</option><option>Property partnership</option><option>Other inquiry</option></select></div>
-<div class="field"><label data-en="I am a..." data-id="I am a..." for="role">I am a...</label><select id="role" name="role"><option>Investor / Investment representative</option><option>Property owner</option><option>Company / Developer</option><option>Property agent / Consultant</option><option>Other</option></select></div>
-<div class="field full"><label data-en="Message" data-id="Message" for="message">Message</label><textarea id="message" name="message" placeholder="Tell us briefly about your inquiry..." required=""></textarea></div>
-<div class="form-foot">
-<button class="btn" data-en="Send inquiry →" data-id="Send inquiry →" type="submit">Send inquiry →</button>
-<span aria-live="polite" class="form-message" id="formMessage"></span>
-</div>
-</form>
-<p class="disclaimer" data-en="Your email application will open with your inquiry prepared. Please review and send it." data-id="Your email application will open with your inquiry prepared. Please review and send it.">Your email application will open with your inquiry prepared. Please review and send it.</p>
-</div>
-</div>
-</div>
-</section>
-</main>
-<footer>
-<div class="container footer-inner">
-<span>© <span id="year"></span> GLOBAL PROPERTY INVESTMENT. All rights reserved.</span>
-<div class="footer-links"><a href="#home">Home</a><a href="#properties">Opportunities</a><a href="#contact">Contact</a></div>
-<span>Built for international property connections.</span>
-</div>
-</footer>
-<div class="mobile-cta"><a class="btn" data-en="Contact our team" data-id="Contact our team" href="#contact">Contact our team</a></div>
-<script>
-    // ==========================================
-    // SUPABASE CONFIGURATION
-    // ==========================================
-    const SUPABASE_URL = 'https://ppyqsdtprdcylsdgaw.supabase.co';
-    const SUPABASE_KEY = 'sb_publishable_DvC7NMmqaWLVmpYvd_PPuQ_RssCluyW';
-    
-    // Initialize the Supabase client
-    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  <div class="topbar">
+    <div class="container"><span>INDONESIA PROPERTY OPPORTUNITIES · INTERNATIONAL PARTNERSHIPS</span><span>Professional property information platform</span></div>
+  </div>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="Global Property Investment home">
+        <span class="brand-mark">G</span><span>GLOBAL PROPERTY<small>INVESTMENT · INDONESIA</small></span>
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#about" data-en="About" data-id="Tentang">About</a>
+        <a href="#properties" data-en="Opportunities" data-id="Peluang">Opportunities</a>
+        <a href="#catalog" data-en="Property Catalog" data-id="Katalog Properti">Property Catalog</a>
+        <a href="#process" data-en="How It Works" data-id="Cara Kerja">How It Works</a>
+        <a href="#contact" data-en="Contact" data-id="Kontak">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="lang-btn" id="langToggle" type="button" aria-label="Switch language">ID / EN</button>
+        <a class="btn" href="#contact" data-en="Connect with us" data-id="Hubungi Kami">Connect with us</a>
+        <button class="menu-btn" id="menuToggle" type="button" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </header>
 
-    // ==========================================
-    // NAVIGATION
-    // ==========================================
+  <main>
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-content">
+          <span class="eyebrow" data-en="Indonesia · Real Estate Opportunities" data-id="Indonesia · Peluang Properti">Indonesia · Real Estate Opportunities</span>
+          <h1 data-en="Discover Property Opportunities in <span>Indonesia</span>" data-id="Temukan Peluang Properti di <span>Indonesia</span>">Discover Property Opportunities in <span>Indonesia</span></h1>
+          <p data-en="A professional gateway connecting property owners, developers, and international parties interested in exploring commercial, industrial, and land opportunities across Indonesia." data-id="Platform profesional yang menghubungkan pemilik properti, pengembang, dan mitra internasional yang ingin menjajaki peluang lahan komersial, industri, dan properti di Indonesia.">A professional gateway connecting property owners, developers, and international parties interested in exploring commercial, industrial, and land opportunities across Indonesia.</p>
+          <div class="hero-buttons">
+            <a class="btn" href="#properties" data-en="Explore opportunities →" data-id="Jelajahi peluang →">Explore opportunities →</a>
+            <a class="btn btn-outline" href="#contact" data-en="Submit an inquiry" data-id="Kirim pertanyaan">Submit an inquiry</a>
+          </div>
+          <div class="hero-note">
+            <div><strong>Commercial</strong><span data-en="Strategic locations" data-id="Lokasi strategis">Strategic locations</span></div>
+            <div><strong>Industrial</strong><span data-en="Land & facilities" data-id="Lahan & fasilitas">Land & facilities</span></div>
+            <div><strong>Partnerships</strong><span data-en="International connections" data-id="Koneksi internasional">International connections</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container about-grid">
+        <div class="about-copy">
+          <span class="eyebrow" data-en="About our platform" data-id="Tentang platform">About our platform</span>
+          <h2 data-en="Local opportunities. <span style='color:var(--gold2)'>Global perspective.</span>" data-id="Peluang lokal. <span style='color:var(--gold2)'>Perspektif global.</span>">Local opportunities. <span style="color:var(--gold2)">Global perspective.</span></h2>
+          <p data-en="GLOBAL PROPERTY INVESTMENT is designed as an information and introduction platform for Indonesian property opportunities. We help interested parties start a conversation, request property information, and explore potential cooperation." data-id="GLOBAL PROPERTY INVESTMENT dirancang sebagai platform informasi dan pengenalan peluang properti Indonesia. Kami membantu pihak yang berminat memulai komunikasi, meminta informasi properti, dan menjajaki kemungkinan kerja sama.">GLOBAL PROPERTY INVESTMENT is designed as an information and introduction platform for Indonesian property opportunities. We help interested parties start a conversation, request property information, and explore potential cooperation.</p>
+          <div class="feature-list">
+            <div class="feature"><b>01 · Land</b><span data-en="Land for commercial and other permitted uses" data-id="Lahan untuk penggunaan komersial dan peruntukan lain yang diizinkan">Land for commercial and other permitted uses</span></div>
+            <div class="feature"><b>02 · Industrial</b><span data-en="Industrial sites, warehouses, and facilities" data-id="Kawasan industri, gudang, dan fasilitas">Industrial sites, warehouses, and facilities</span></div>
+            <div class="feature"><b>03 · Commercial</b><span data-en="Business and development locations" data-id="Lokasi bisnis dan pengembangan">Business and development locations</span></div>
+            <div class="feature"><b>04 · Introductions</b><span data-en="Initial contact between relevant parties" data-id="Kontak awal antarpihak terkait">Initial contact between relevant parties</span></div>
+          </div>
+        </div>
+        <div class="about-image" role="img" aria-label="Modern city buildings">
+          <div class="image-tag"><strong>INDONESIA</strong><span data-en="A market of diverse property opportunities" data-id="Pasar dengan beragam peluang properti">A market of diverse property opportunities</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dark-section" id="properties">
+      <div class="container">
+        <div class="section-head">
+          <div><span class="eyebrow" data-en="Explore sectors" data-id="Jelajahi sektor">Explore sectors</span><h2 data-en="Property opportunities" data-id="Peluang properti">Property opportunities</h2></div>
+          <p data-en="Explore the types of property opportunities that can be presented through this platform." data-id="Jelajahi jenis peluang properti yang dapat ditampilkan melalui platform ini.">Explore the types of property opportunities that can be presented through this platform.</p>
+        </div>
+        <div class="property-grid">
+          <article class="property-card">
+            <div class="property-photo" style="background-image:url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=80')"><span class="property-label">LAND</span></div>
+            <div class="property-body"><h3 data-en="Strategic Land" data-id="Lahan Strategis">Strategic Land</h3><div class="property-location" data-en="Commercial and development potential" data-id="Potensi komersial dan pengembangan">Commercial and development potential</div><div class="property-meta"><span data-en="Property type" data-id="Jenis properti">Property type</span><strong data-en="Land parcels" data-id="Bidang tanah">Land parcels</strong></div></div>
+          </article>
+          <article class="property-card">
+            <div class="property-photo" style="background-image:url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=900&q=80')"><span class="property-label">INDUSTRIAL</span></div>
+            <div class="property-body"><h3 data-en="Industrial Facilities" data-id="Fasilitas Industri">Industrial Facilities</h3><div class="property-location" data-en="Factories, warehouses, and industrial sites" data-id="Pabrik, gudang, dan kawasan industri">Factories, warehouses, and industrial sites</div><div class="property-meta"><span data-en="Property type" data-id="Jenis properti">Property type</span><strong data-en="Industrial" data-id="Industri">Industrial</strong></div></div>
+          </article>
+          <article class="property-card">
+            <div class="property-photo" style="background-image:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80')"><span class="property-label">COMMERCIAL</span></div>
+            <div class="property-body"><h3 data-en="Commercial Property" data-id="Properti Komersial">Commercial Property</h3><div class="property-location" data-en="Business districts and strategic locations" data-id="Kawasan bisnis dan lokasi strategis">Business districts and strategic locations</div><div class="property-meta"><span data-en="Property type" data-id="Jenis properti">Property type</span><strong data-en="Commercial" data-id="Komersial">Commercial</strong></div></div>
+          </article>
+        </div>
+        <p class="sample-note" data-en="Illustrative sector categories only. Specific property availability, ownership, permits, pricing, and documentation must be confirmed for each listing." data-id="Kategori sektor ini hanya ilustrasi. Ketersediaan, kepemilikan, perizinan, harga, dan dokumen setiap properti harus dikonfirmasi untuk masing-masing listing.">Illustrative sector categories only. Specific property availability, ownership, permits, pricing, and documentation must be confirmed for each listing.</p>
+      </div>
+    </section>
+
+    <section id="catalog" class="catalog-section">
+      <div class="container">
+        <div class="section-head">
+          <div><span class="eyebrow" data-en="Integrated property directory" data-id="Direktori properti terintegrasi">Integrated property directory</span><h2 data-en="Explore our property catalog" data-id="Jelajahi katalog properti">Explore our property catalog</h2></div>
+          <p data-en="A quick overview of the IndoProperti commercial and industrial property listings." data-id="Ringkasan singkat listing properti komersial dan industri IndoProperti.">A quick overview of the IndoProperti commercial and industrial property listings.</p>
+        </div>
+
+        <a class="catalog-card" href="https://nurdinhidayatullohelghifari.github.io/indoproppertikomersialindustri/" target="_blank" rel="noopener noreferrer" aria-label="Open IndoProperti Commercial and Industrial website">
+          <div class="catalog-brand">
+            <div class="catalog-logo" aria-hidden="true"><span>IP</span></div>
+            <div class="catalog-brand-text">
+              <span class="catalog-kicker">PROPERTY DIRECTORY</span>
+              <h3>INDOPROPERTI</h3>
+              <p>KOMERSIAL · INDUSTRI</p>
+            </div>
+          </div>
+          <div class="catalog-summary">
+            <div class="catalog-stat"><strong>01</strong><span data-en="Land listings" data-id="Listing lahan">Land listings</span></div>
+            <div class="catalog-stat"><strong>02</strong><span data-en="Commercial properties" data-id="Properti komersial">Commercial properties</span></div>
+            <div class="catalog-stat"><strong>03</strong><span data-en="Industrial properties" data-id="Properti industri">Industrial properties</span></div>
+          </div>
+          <div class="catalog-action">
+            <span data-en="View all listings on IndoProperti" data-id="Lihat semua listing di IndoProperti">View all listings on IndoProperti</span>
+            <span class="catalog-arrow" aria-hidden="true">↗</span>
+          </div>
+        </a>
+        <p class="sample-note" data-en="Select this panel to open the full IndoProperti website and view its current listings." data-id="Klik panel ini untuk membuka website IndoProperti dan melihat listing terbarunya.">Select this panel to open the full IndoProperti website and view its current listings.</p>
+      </div>
+    </section>
+    <section class="dark-section" id="process">
+      <div class="container">
+        <div class="section-head">
+          <div><span class="eyebrow" data-en="A clear starting point" data-id="Langkah awal yang jelas">A clear starting point</span><h2 data-en="How the introduction process works" data-id="Cara proses pengenalan berjalan">How the introduction process works</h2></div>
+          <p data-en="An initial inquiry is a starting point for discussion, not an offer, guarantee, or investment recommendation." data-id="Pertanyaan awal merupakan awal diskusi, bukan penawaran, jaminan, atau rekomendasi investasi.">An initial inquiry is a starting point for discussion, not an offer, guarantee, or investment recommendation.</p>
+        </div>
+        <div class="process-grid">
+          <div class="process-card"><span class="process-number">STEP 01</span><h3 data-en="Send an inquiry" data-id="Kirim pertanyaan">Send an inquiry</h3><p data-en="Tell us what property type or cooperation opportunity you want to explore." data-id="Sampaikan jenis properti atau peluang kerja sama yang ingin dijajaki.">Tell us what property type or cooperation opportunity you want to explore.</p></div>
+          <div class="process-card"><span class="process-number">STEP 02</span><h3 data-en="Initial discussion" data-id="Diskusi awal">Initial discussion</h3><p data-en="Discuss general requirements, location preferences, and information needed." data-id="Diskusikan kebutuhan umum, preferensi lokasi, dan informasi yang diperlukan.">Discuss general requirements, location preferences, and information needed.</p></div>
+          <div class="process-card"><span class="process-number">STEP 03</span><h3 data-en="Review information" data-id="Tinjau informasi">Review information</h3><p data-en="Relevant property documents and details should be independently checked." data-id="Dokumen dan detail properti terkait perlu diperiksa secara independen.">Relevant property documents and details should be independently checked.</p></div>
+          <div class="process-card"><span class="process-number">STEP 04</span><h3 data-en="Professional follow-up" data-id="Tindak lanjut profesional">Professional follow-up</h3><p data-en="Parties may proceed to professional, legal, and regulatory consultation as appropriate." data-id="Para pihak dapat melanjutkan konsultasi profesional, hukum, dan regulasi sesuai kebutuhan.">Parties may proceed to professional, legal, and regulatory consultation as appropriate.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-head">
+          <div><span class="eyebrow" data-en="Start a conversation" data-id="Mulai komunikasi">Start a conversation</span><h2 data-en="Connect with our team" data-id="Hubungi tim kami">Connect with our team</h2></div>
+          <p data-en="Property owners, companies, and international parties can use this form to introduce their inquiry." data-id="Pemilik properti, perusahaan, dan pihak internasional dapat menggunakan formulir ini untuk menyampaikan pertanyaan awal.">Property owners, companies, and international parties can use this form to introduce their inquiry.</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-panel">
+            <span class="eyebrow" data-en="Contact information" data-id="Informasi kontak">Contact information</span>
+            <h3>GLOBAL PROPERTY INVESTMENT</h3>
+            <p class="muted" data-en="Indonesia property information and introductions." data-id="Informasi dan pengenalan peluang properti Indonesia.">Indonesia property information and introductions.</p>
+            <div class="contact-item"><b data-en="Email" data-id="Email">Email</b><span>Set your business email in the website code</span></div>
+            <div class="contact-item"><b data-en="WhatsApp" data-id="WhatsApp">WhatsApp</b><span>Set your official business number in the website code</span></div>
+            <div class="contact-item"><b data-en="Office / Location" data-id="Kantor / Lokasi">Office / Location</b><span data-en="Indonesia" data-id="Indonesia">Indonesia</span></div>
+            <p class="disclaimer" data-en="Contact details are intentionally left as placeholders. Add only official business contact information before publishing." data-id="Detail kontak sengaja dibiarkan sebagai placeholder. Tambahkan hanya informasi kontak bisnis resmi sebelum dipublikasikan.">Contact details are intentionally left as placeholders. Add only official business contact information before publishing.</p>
+          </div>
+          <div class="contact-panel">
+            <form id="inquiryForm">
+              <div class="field"><label for="name" data-en="Full name" data-id="Nama lengkap">Full name</label><input id="name" name="name" required autocomplete="name" placeholder="Your name"></div>
+              <div class="field"><label for="company" data-en="Company" data-id="Perusahaan">Company</label><input id="company" name="company" placeholder="Company name"></div>
+              <div class="field"><label for="country" data-en="Country" data-id="Negara">Country</label><input id="country" name="country" required autocomplete="country-name" placeholder="Your country"></div>
+              <div class="field"><label for="email" data-en="Email address" data-id="Alamat email">Email address</label><input id="email" name="email" type="email" required autocomplete="email" placeholder="name@company.com"></div>
+              <div class="field"><label for="interest" data-en="Area of interest" data-id="Minat properti">Area of interest</label><select id="interest" name="interest" required><option value="" data-en="Select an option" data-id="Pilih salah satu">Select an option</option><option>Commercial land</option><option>Industrial property</option><option>Warehouse / factory</option><option>Property partnership</option><option>Other inquiry</option></select></div>
+              <div class="field"><label for="role" data-en="I am a..." data-id="Saya adalah...">I am a...</label><select id="role" name="role"><option>Investor / Investment representative</option><option>Property owner</option><option>Company / Developer</option><option>Property agent / Consultant</option><option>Other</option></select></div>
+              <div class="field full"><label for="message" data-en="Message" data-id="Pesan">Message</label><textarea id="message" name="message" required placeholder="Tell us briefly about your inquiry..."></textarea></div>
+              <div class="form-foot"><button class="btn" type="submit" data-en="Prepare email inquiry →" data-id="Siapkan email pertanyaan →">Prepare email inquiry →</button><span class="form-message" id="formMessage" aria-live="polite"></span></div>
+            </form>
+            <p class="disclaimer" data-en="This demo form opens your email application. It does not store or transmit form data to a server." data-id="Formulir demo ini membuka aplikasi email Anda. Data formulir tidak disimpan atau dikirim ke server.">This demo form opens your email application. It does not store or transmit form data to a server.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> GLOBAL PROPERTY INVESTMENT. All rights reserved.</span>
+      <div class="footer-links"><a href="#home">Home</a><a href="#properties">Opportunities</a><a href="#contact">Contact</a></div>
+      <span>Built for international property connections.</span>
+    </div>
+  </footer>
+  <div class="mobile-cta"><a class="btn" href="#contact" data-en="Contact our team" data-id="Hubungi tim kami">Contact our team</a></div>
+
+  <script>
+    // IMPORTANT: Replace these placeholders with your official business contact details.
+    const BUSINESS_EMAIL = "YOUR_BUSINESS_EMAIL@example.com";
+
     const menuToggle = document.getElementById("menuToggle");
     const navLinks = document.getElementById("navLinks");
     menuToggle.addEventListener("click", () => navLinks.classList.toggle("open"));
     navLinks.querySelectorAll("a").forEach(link => link.addEventListener("click", () => navLinks.classList.remove("open")));
 
     let currentLang = "en";
-    document.documentElement.lang = "en";
+    document.getElementById("langToggle").addEventListener("click", () => {
+      currentLang = currentLang === "en" ? "id" : "en";
+      document.documentElement.lang = currentLang;
+      document.querySelectorAll("[data-en][data-id]").forEach(el => {
+        el.innerHTML = el.dataset[currentLang];
+      });
+    });
 
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // ==========================================
-    // PREPARE EMAIL INQUIRY
-    // The form prepares an email addressed to the designated recipient.
     document.getElementById("inquiryForm").addEventListener("submit", function(event) {
       event.preventDefault();
-
-      const formData = new FormData(this);
-      const formMessage = document.getElementById("formMessage");
-      const recipient = "elghifarin@gmail.com";
-      const subject = "Property Inquiry - GLOBAL PROPERTY INVESTMENT";
-
-      const body = [
-        "GLOBAL PROPERTY INVESTMENT - PROPERTY INQUIRY",
-        "",
-        "Full name: " + (formData.get("name") || ""),
-        "Company: " + (formData.get("company") || "-"),
-        "Country: " + (formData.get("country") || ""),
-        "Email address: " + (formData.get("email") || ""),
-        "Area of interest: " + (formData.get("interest") || ""),
-        "I am a: " + (formData.get("role") || ""),
-        "",
-        "Message:",
-        formData.get("message") || ""
-      ].join("\\n");
-
-      const mailtoUrl = "mailto:" + recipient
-        + "?subject=" + encodeURIComponent(subject)
-        + "&body=" + encodeURIComponent(body);
-
-      formMessage.textContent = currentLang === "en"
-        ? "Your email application is opening with the inquiry prepared. Please review and press Send."
-        : "Your email application is opening with the inquiry prepared. Review the details and press Send.";
-      formMessage.style.color = "var(--gold2)";
-      window.location.href = mailtoUrl;
+      const form = new FormData(this);
+      const subject = encodeURIComponent("Property Inquiry - GLOBAL PROPERTY INVESTMENT");
+      const body = encodeURIComponent(
+        "Name: " + form.get("name") + "\n" +
+        "Company: " + form.get("company") + "\n" +
+        "Country: " + form.get("country") + "\n" +
+        "Email: " + form.get("email") + "\n" +
+        "Interest: " + form.get("interest") + "\n" +
+        "Role: " + form.get("role") + "\n\n" +
+        "Message:\n" + form.get("message")
+      );
+      if (BUSINESS_EMAIL === "YOUR_BUSINESS_EMAIL@example.com") {
+        document.getElementById("formMessage").textContent =
+          currentLang === "en"
+          ? "Please set BUSINESS_EMAIL in the HTML code before publishing."
+          : "Atur BUSINESS_EMAIL di kode HTML sebelum website dipublikasikan.";
+        return;
+      }
+      window.location.href = `mailto:${BUSINESS_EMAIL}?subject=${subject}&body=${body}`;
     });
   </script>
 </body>

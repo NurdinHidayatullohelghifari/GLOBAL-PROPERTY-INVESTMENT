@@ -6,6 +6,10 @@
   <meta name="description" content="GLOBAL PROPERTY INVESTMENT connects property opportunities in Indonesia with international partners and investors.">
   <meta name="theme-color" content="#071521">
   <title>GLOBAL PROPERTY INVESTMENT | Indonesia Property Opportunities</title>
+  
+  <!-- Supabase JS Library -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <style>
     :root{
       --navy:#071521;--navy2:#0d2433;--panel:#102b3b;--gold:#d8b46a;--gold2:#f0d79e;
@@ -24,7 +28,8 @@
     header{position:sticky;top:0;z-index:50;background:rgba(7,21,33,.91);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
     .nav{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:24px}
     .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.08em;font-size:.9rem}
-    .brand-mark{width:40px;height:40px;border:1px solid var(--gold);border-radius:12px;display:grid;place-items:center;color:var(--gold);font-size:1.15rem}
+    .brand-mark{width:150px;height:70px;flex:0 0 150px;border:0;border-radius:0;display:block;background:transparent;overflow:hidden}
+    .brand-mark img{width:100%;height:100%;object-fit:contain}
     .brand small{display:block;color:var(--gold);font-size:.58rem;letter-spacing:.2em;font-weight:600}
     .nav-links{display:flex;align-items:center;gap:25px;color:#d8e0e3;font-size:.88rem}
     .nav-links a:hover{color:var(--gold2)}
@@ -33,6 +38,7 @@
     .menu-btn{display:none}
     .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 19px;border-radius:12px;border:1px solid transparent;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#17212a;font-weight:800;font-size:.88rem;cursor:pointer;transition:.2s}
     .btn:hover{transform:translateY(-2px);filter:brightness(1.06)}
+    .btn:disabled{opacity:0.6;cursor:not-allowed;transform:none}
     .btn-outline{background:transparent;color:var(--white);border-color:rgba(216,180,106,.65)}
     .hero{position:relative;overflow:hidden;padding:105px 0 95px;background:linear-gradient(90deg,rgba(5,17,27,.96),rgba(5,17,27,.75) 55%,rgba(5,17,27,.35)),url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=85') center/cover}
     .hero:after{content:"";position:absolute;width:520px;height:520px;border:1px solid rgba(216,180,106,.18);border-radius:50%;right:-180px;top:-170px;box-shadow:0 0 0 45px rgba(216,180,106,.035),0 0 0 95px rgba(216,180,106,.025)}
@@ -75,7 +81,7 @@
     .catalog-card{display:grid;grid-template-columns:1fr 1.35fr auto;align-items:center;gap:30px;padding:27px 30px;border:1px solid rgba(216,180,106,.35);border-radius:20px;background:linear-gradient(115deg,#102b3b,#0a1c29);box-shadow:var(--shadow);transition:.25s}
     .catalog-card:hover{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 28px 75px rgba(0,0,0,.36)}
     .catalog-brand{display:flex;align-items:center;gap:16px;min-width:0}
-    .catalog-logo{width:66px;height:66px;flex:0 0 66px;border-radius:17px;border:1px solid rgba(216,180,106,.7);display:grid;place-items:center;background:linear-gradient(145deg,rgba(216,180,106,.2),rgba(216,180,106,.04));color:var(--gold2);font-weight:900;font-size:1.35rem;letter-spacing:-.08em}
+    .catalog-logo{width:76px;height:76px;flex:0 0 76px;display:grid;place-items:center;overflow:hidden;background:transparent;border:0;border-radius:0}.catalog-logo img{width:100%;height:100%;object-fit:contain;display:block}
     .catalog-brand-text h3{font-size:1.2rem;letter-spacing:.08em;margin:3px 0 0;color:var(--white)}
     .catalog-brand-text p{margin:1px 0 0;font-size:.7rem;letter-spacing:.16em;color:var(--gold2)}
     .catalog-kicker{font-size:.62rem;letter-spacing:.18em;color:var(--muted);font-weight:800}
@@ -107,29 +113,13 @@
     select option{background:#091b28}
     textarea{min-height:125px;resize:vertical}
     .form-foot{grid-column:1/-1;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-    .form-message{font-size:.8rem;color:var(--muted)}
+    .form-message{font-size:.8rem;font-weight:600}
     .disclaimer{font-size:.78rem;color:var(--muted);margin-top:15px}
     footer{border-top:1px solid var(--line);padding:28px 0;background:#06111a;color:var(--muted);font-size:.8rem}
     .footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
     .footer-links{display:flex;gap:18px;flex-wrap:wrap}
     .footer-links a:hover{color:var(--gold2)}
     .mobile-cta{display:none}
-
-    /* === Tambahan CSS khusus untuk logo kontak (minimal, tidak mengubah design asli) === */
-    .contact-icon-link{
-      display:inline-grid;place-items:center;
-      width:42px;height:42px;border-radius:12px;
-      background:rgba(216,180,106,.08);
-      border:1px solid rgba(216,180,106,.35);
-      transition:.25s;cursor:pointer;
-    }
-    .contact-icon-link:hover{
-      background:rgba(216,180,106,.18);
-      border-color:var(--gold);
-      transform:translateY(-2px);
-    }
-    .contact-icon-link svg{width:20px;height:20px;display:block}
-
     @media(max-width:900px){
       .nav-links{gap:14px;font-size:.8rem}.property-grid{grid-template-columns:repeat(2,1fr)}
       .process-grid{grid-template-columns:repeat(2,1fr)}.about-grid{gap:30px}
@@ -137,7 +127,7 @@
     @media(max-width:700px){
       .container{width:min(100% - 30px,1160px)}
       .topbar .container{justify-content:center;text-align:center}.topbar .container span:last-child{display:none}
-      .nav{min-height:68px}.menu-btn{display:inline-flex}.nav-links{display:none;position:absolute;top:68px;left:0;right:0;background:#081925;padding:18px 22px 22px;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch}
+      .nav{min-height:68px}.brand-mark{width:120px;height:58px;flex-basis:120px}.menu-btn{display:inline-flex}.nav-links{display:none;position:absolute;top:68px;left:0;right:0;background:#081925;padding:18px 22px 22px;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch}
       .nav-links.open{display:flex}.nav-links a{padding:8px 0}.nav-actions .btn{display:none}
       .hero{padding:75px 0 65px;background-position:60% center}.hero-note{gap:17px}
       section{padding:62px 0}.section-head{display:block}.section-head p{margin-top:14px}
@@ -157,7 +147,7 @@
     @media(max-width:420px){
       .process-grid,.feature-list{grid-template-columns:1fr}
       .hero-buttons .btn{width:100%}.brand{font-size:.75rem}
-      .catalog-logo{width:56px;height:56px;flex-basis:56px}
+      .catalog-logo{width:60px;height:60px;flex-basis:60px}
       .catalog-brand-text h3{font-size:1.05rem}
     }
   </style>
@@ -169,7 +159,7 @@
   <header>
     <div class="container nav">
       <a class="brand" href="#home" aria-label="Global Property Investment home">
-        <span class="brand-mark">G</span><span>GLOBAL PROPERTY<small>INVESTMENT · INDONESIA</small></span>
+        <span class="brand-mark"><img src="Logo.png" alt="Global Property Investment logo"></span>
       </a>
       <nav class="nav-links" id="navLinks" aria-label="Main navigation">
         <a href="#about" data-en="About" data-id="Tentang">About</a>
@@ -258,7 +248,7 @@
 
         <a class="catalog-card" href="https://nurdinhidayatullohelghifari.github.io/indoproppertikomersialindustri/" target="_blank" rel="noopener noreferrer" aria-label="Open IndoProperti Commercial and Industrial website">
           <div class="catalog-brand">
-            <div class="catalog-logo" aria-hidden="true"><span>IP</span></div>
+            <div class="catalog-logo"><img src="IP.png" alt="IndoProperti logo"></div>
             <div class="catalog-brand-text">
               <span class="catalog-kicker">PROPERTY DIRECTORY</span>
               <h3>INDOPROPERTI</h3>
@@ -278,6 +268,7 @@
         <p class="sample-note" data-en="Select this panel to open the full IndoProperti website and view its current listings." data-id="Klik panel ini untuk membuka website IndoProperti dan melihat listing terbarunya.">Select this panel to open the full IndoProperti website and view its current listings.</p>
       </div>
     </section>
+    
     <section class="dark-section" id="process">
       <div class="container">
         <div class="section-head">
@@ -303,32 +294,32 @@
           <div class="contact-panel">
             <span class="eyebrow" data-en="Contact information" data-id="Informasi kontak">Contact information</span>
             <h3>GLOBAL PROPERTY INVESTMENT</h3>
-            <p class="muted" data-en="Indonesia property information and introductions." data-id="Informasi dan pengenalan peluang properti Indonesia.">Indonesia property information and introductions.</p>
-
-            <!-- EMAIL: Logo Only (klik untuk buka email) -->
-            <div class="contact-item">
-              <b data-en="Email" data-id="Email">Email</b>
-              <a class="contact-icon-link" href="mailto:elghifarin@gmail.com" aria-label="Email us at elghifarin@gmail.com" title="elghifarin@gmail.com">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#f0d79e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                  <polyline points="22,6 12,13 2,6"></polyline>
-                </svg>
-              </a>
+            <p class="muted">Indonesia property information and introductions.</p>
+            
+            <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=elghifarin%40gmail.com" target="_blank" rel="noopener noreferrer" class="contact-item" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;" aria-label="Open Gmail compose to elghifarin@gmail.com">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+                <rect width="20" height="16" x="2" y="4" rx="2"/>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
+              <div><b>Email</b>Klik untuk kirim email</div>
+            </a>
+            
+            <a href="https://wa.me/6282126526162" target="_blank" rel="noopener noreferrer" class="contact-item" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#25D366" style="flex-shrink:0;">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+              </svg>
+              <div><b>WhatsApp</b>Klik untuk memulai chat</div>
+            </a>
+            
+            <div class="contact-item" style="border-bottom:none;display:flex;align-items:center;gap:12px;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              <div><b>Office / Location</b>Indonesia</div>
             </div>
-
-            <!-- WHATSAPP: Logo Only (klik untuk buka WhatsApp) -->
-            <div class="contact-item">
-              <b data-en="WhatsApp" data-id="WhatsApp">WhatsApp</b>
-              <a class="contact-icon-link" href="https://wa.me/6282126526162" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp +6282126526162" title="+62 821-2652-6162">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                </svg>
-              </a>
-            </div>
-
-            <div class="contact-item"><b data-en="Office / Location" data-id="Kantor / Lokasi">Office / Location</b><span data-en="Indonesia" data-id="Indonesia">Indonesia</span></div>
-            <p class="disclaimer" data-en="Contact details are intentionally left as placeholders. Add only official business contact information before publishing." data-id="Detail kontak sengaja dibiarkan sebagai placeholder. Tambahkan hanya informasi kontak bisnis resmi sebelum dipublikasikan.">Contact details are intentionally left as placeholders. Add only official business contact information before publishing.</p>
           </div>
+          
           <div class="contact-panel">
             <form id="inquiryForm">
               <div class="field"><label for="name" data-en="Full name" data-id="Nama lengkap">Full name</label><input id="name" name="name" required autocomplete="name" placeholder="Your name"></div>
@@ -338,9 +329,12 @@
               <div class="field"><label for="interest" data-en="Area of interest" data-id="Minat properti">Area of interest</label><select id="interest" name="interest" required><option value="" data-en="Select an option" data-id="Pilih salah satu">Select an option</option><option>Commercial land</option><option>Industrial property</option><option>Warehouse / factory</option><option>Property partnership</option><option>Other inquiry</option></select></div>
               <div class="field"><label for="role" data-en="I am a..." data-id="Saya adalah...">I am a...</label><select id="role" name="role"><option>Investor / Investment representative</option><option>Property owner</option><option>Company / Developer</option><option>Property agent / Consultant</option><option>Other</option></select></div>
               <div class="field full"><label for="message" data-en="Message" data-id="Pesan">Message</label><textarea id="message" name="message" required placeholder="Tell us briefly about your inquiry..."></textarea></div>
-              <div class="form-foot"><button class="btn" type="submit" data-en="Prepare email inquiry →" data-id="Siapkan email pertanyaan →">Prepare email inquiry →</button><span class="form-message" id="formMessage" aria-live="polite"></span></div>
+              <div class="form-foot">
+                <button class="btn" type="submit" data-en="Send inquiry →" data-id="Kirim pertanyaan →">Send inquiry →</button>
+                <span class="form-message" id="formMessage" aria-live="polite"></span>
+              </div>
             </form>
-            <p class="disclaimer" data-en="This demo form opens your email application. It does not store or transmit form data to a server." data-id="Formulir demo ini membuka aplikasi email Anda. Data formulir tidak disimpan atau dikirim ke server.">This demo form opens your email application. It does not store or transmit form data to a server.</p>
+            <p class="disclaimer" data-en="Your email application will open with your inquiry prepared. Please review and send it." data-id="Aplikasi email Anda akan terbuka dengan pertanyaan yang sudah disiapkan. Silakan periksa dan kirim.">Your email application will open with your inquiry prepared. Please review and send it.</p>
           </div>
         </div>
       </div>
@@ -357,39 +351,149 @@
   <div class="mobile-cta"><a class="btn" href="#contact" data-en="Contact our team" data-id="Hubungi tim kami">Contact our team</a></div>
 
   <script>
-    const BUSINESS_EMAIL = "elghifarin@gmail.com";
+    // ==========================================
+    // SUPABASE + EMAIL INQUIRY
+    // ==========================================
+    const SUPABASE_URL = "https://ppyqrsdtprdcylsdgaw.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_DvC7NMmqaWLVmpYvd_PPuQ_RssCluyW";
+    const EMAIL_RECIPIENT = "elghifarin@gmail.com";
 
+    // Supabase is optional for the page to remain interactive if its CDN is unavailable.
+    let supabaseClient = null;
+    if (window.supabase && typeof window.supabase.createClient === "function") {
+      supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    }
+
+    // Navigation and language toggle
     const menuToggle = document.getElementById("menuToggle");
     const navLinks = document.getElementById("navLinks");
-    menuToggle.addEventListener("click", () => navLinks.classList.toggle("open"));
-    navLinks.querySelectorAll("a").forEach(link => link.addEventListener("click", () => navLinks.classList.remove("open")));
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener("click", () => navLinks.classList.toggle("open"));
+      navLinks.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => navLinks.classList.remove("open"));
+      });
+    }
 
     let currentLang = "en";
-    document.getElementById("langToggle").addEventListener("click", () => {
-      currentLang = currentLang === "en" ? "id" : "en";
-      document.documentElement.lang = currentLang;
-      document.querySelectorAll("[data-en][data-id]").forEach(el => {
-        el.innerHTML = el.dataset[currentLang];
+    const langToggle = document.getElementById("langToggle");
+    if (langToggle) {
+      langToggle.addEventListener("click", () => {
+        currentLang = currentLang === "en" ? "id" : "en";
+        document.documentElement.lang = currentLang;
+        document.querySelectorAll("[data-en][data-id]").forEach(el => {
+          el.textContent = el.dataset[currentLang];
+        });
       });
-    });
+    }
 
-    document.getElementById("year").textContent = new Date().getFullYear();
+    const yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    document.getElementById("inquiryForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-      const form = new FormData(this);
-      const subject = encodeURIComponent("Property Inquiry - GLOBAL PROPERTY INVESTMENT");
-      const body = encodeURIComponent(
-        "Name: " + form.get("name") + "\n" +
-        "Company: " + form.get("company") + "\n" +
-        "Country: " + form.get("country") + "\n" +
-        "Email: " + form.get("email") + "\n" +
-        "Interest: " + form.get("interest") + "\n" +
-        "Role: " + form.get("role") + "\n\n" +
-        "Message:\n" + form.get("message")
-      );
-      window.location.href = `mailto:${BUSINESS_EMAIL}?subject=${subject}&body=${body}`;
-    });
+    function makeInquiryContent(data) {
+      const subject = currentLang === "en"
+        ? "Property Inquiry - GLOBAL PROPERTY INVESTMENT"
+        : "Pertanyaan Properti - GLOBAL PROPERTY INVESTMENT";
+      const body = [
+        "GLOBAL PROPERTY INVESTMENT - PROPERTY INQUIRY",
+        "",
+        "Full name: " + (data.name || ""),
+        "Company: " + (data.company || "-"),
+        "Country: " + (data.country || ""),
+        "Email address: " + (data.email || ""),
+        "Area of interest: " + (data.interest || ""),
+        "I am a: " + (data.role || ""),
+        "",
+        "Message:",
+        data.message || ""
+      ].join("\n");
+      const gmailUrl = "https://mail.google.com/mail/?view=cm&fs=1"
+        + "&to=" + encodeURIComponent(EMAIL_RECIPIENT)
+        + "&su=" + encodeURIComponent(subject)
+        + "&body=" + encodeURIComponent(body);
+      const mailtoUrl = "mailto:" + EMAIL_RECIPIENT
+        + "?subject=" + encodeURIComponent(subject)
+        + "&body=" + encodeURIComponent(body);
+      return { gmailUrl, mailtoUrl };
+    }
+
+    // Open Gmail directly from the user's click; mailto remains a fallback.
+    const inquiryForm = document.getElementById("inquiryForm");
+    if (inquiryForm) {
+      inquiryForm.addEventListener("submit", async function(event) {
+        event.preventDefault();
+        if (!this.reportValidity()) return;
+
+        const formData = new FormData(this);
+        const inquiryData = {
+          name: String(formData.get("name") || "").trim(),
+          company: String(formData.get("company") || "").trim(),
+          country: String(formData.get("country") || "").trim(),
+          email: String(formData.get("email") || "").trim(),
+          interest: String(formData.get("interest") || "").trim(),
+          role: String(formData.get("role") || "").trim(),
+          message: String(formData.get("message") || "").trim()
+        };
+        const formMessage = document.getElementById("formMessage");
+        const submitButton = inquiryForm.querySelector('button[type="submit"]');
+        const { gmailUrl, mailtoUrl } = makeInquiryContent(inquiryData);
+
+        // User gesture occurs here, before awaiting the database request.
+        const emailWindow = window.open(gmailUrl, "_blank");
+        const popupBlocked = !emailWindow;
+
+        if (submitButton) submitButton.disabled = true;
+        if (formMessage) {
+          formMessage.textContent = currentLang === "en"
+            ? "Email draft opened. Saving your inquiry..."
+            : "Draft email dibuka. Menyimpan inquiry Anda...";
+          formMessage.style.color = "var(--gold2)";
+        }
+
+        try {
+          if (!supabaseClient) {
+            throw new Error("Supabase library could not be loaded. The email draft is still available.");
+          }
+          const { error } = await supabaseClient
+            .from("property_inquiries")
+            .insert([inquiryData]);
+          if (error) throw error;
+
+          if (formMessage) {
+            formMessage.textContent = currentLang === "en"
+              ? "Inquiry saved successfully. Please review the email draft and press Send."
+              : "Inquiry berhasil disimpan. Periksa draft email, lalu tekan Kirim.";
+            formMessage.style.color = "var(--gold2)";
+            if (popupBlocked) {
+              const fallback = document.createElement("a");
+              fallback.href = gmailUrl;
+              fallback.target = "_blank";
+              fallback.rel = "noopener noreferrer";
+              fallback.textContent = currentLang === "en" ? " Open Gmail draft" : " Buka draft Gmail";
+              fallback.style.cssText = "display:inline-block;margin-left:6px;color:var(--gold2);text-decoration:underline;";
+              formMessage.appendChild(fallback);
+            }
+          }
+          inquiryForm.reset();
+        } catch (error) {
+          console.error("Inquiry submission error:", error);
+          if (formMessage) {
+            formMessage.textContent = currentLang === "en"
+              ? "Email draft is ready, but database saving failed. Please send the email; then check Supabase settings."
+              : "Draft email sudah disiapkan, tetapi penyimpanan database gagal. Silakan kirim email dan periksa pengaturan Supabase.";
+            formMessage.style.color = "#ffbf80";
+            const fallback = document.createElement("a");
+            fallback.href = gmailUrl;
+            fallback.target = "_blank";
+            fallback.rel = "noopener noreferrer";
+            fallback.textContent = currentLang === "en" ? " Open Gmail draft" : " Buka draft Gmail";
+            fallback.style.cssText = "display:inline-block;margin-left:6px;color:var(--gold2);text-decoration:underline;";
+            formMessage.appendChild(fallback);
+          }
+        } finally {
+          if (submitButton) submitButton.disabled = false;
+        }
+      });
+    }
   </script>
 </body>
 </html>
